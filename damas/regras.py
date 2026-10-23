@@ -11,7 +11,11 @@ Regras implementadas:
 - uma peça não pode ser capturada duas vezes no mesmo lance, e as
   capturadas só saem do tabuleiro quando o lance termina;
 - o peão só vira dama se TERMINAR o lance na última linha;
-- empate depois de 20 lances seguidos só de damas, sem nenhuma captura.
+- empate depois de 20 lances seguidos de cada jogador só com damas, sem
+  captura nem movimento de peão (Regras Oficiais da CBD, item 16).
+
+Não implementadas: as regras de empate de finais específicos (ex.: duas
+damas contra uma), que encerram a partida em 5 lances.
 """
 
 from dataclasses import dataclass
@@ -23,8 +27,10 @@ from .tipo_peca import VAZIO
 # As 4 direções diagonais: (variação da linha, variação da coluna)
 DIAGONAIS = [(-1, -1), (-1, 1), (1, -1), (1, 1)]
 
-# Lances seguidos só de damas, sem captura, que encerram a partida em empate
-LIMITE_EMPATE = 20
+# Empate: 20 lances seguidos de CADA jogador só com damas, sem captura.
+# O contador soma 1 a cada jogada de qualquer lado, então o limite é 40.
+LANCES_EMPATE_POR_JOGADOR = 20
+LIMITE_EMPATE = 2 * LANCES_EMPATE_POR_JOGADOR
 
 
 @dataclass

@@ -30,7 +30,7 @@ Num terminal sem cores, as casas claras aparecem como `░░░`. A peça que a
 - A captura é obrigatória. Se houver mais de uma, vale a que captura **mais peças** (lei da maioria).
 - O peão vira dama quando **termina** o lance na última fileira. A dama anda e captura à distância.
 - Perde quem não tiver jogada, seja por falta de peças ou por estar bloqueado.
-- A partida empata depois de 20 lances seguidos só de damas, sem nenhuma captura.
+- A partida empata depois de 20 lances seguidos **de cada jogador** só com damas, sem captura nem movimento de peão (item 16 das Regras Oficiais da Confederação Brasileira de Damas). As regras de empate de finais específicos, como duas damas contra uma, não foram implementadas.
 
 ## Testes
 

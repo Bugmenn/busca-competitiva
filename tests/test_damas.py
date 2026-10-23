@@ -148,6 +148,33 @@ class TestRegras(unittest.TestCase):
         self.assertEqual(regras.atualizar_contador(5, tab, peao), 0)   # peão zera
         self.assertEqual(regras.resultado(tab, "branca", regras.LIMITE_EMPATE), "empate")
 
+    def test_empate_e_20_lances_de_cada_jogador(self):
+        # Regra da CBD (item 16): 20 lances de cada jogador = 40 jogadas no total
+        tab = montar(a1="B", h8="P")
+        self.assertEqual(regras.LIMITE_EMPATE, 40)
+        self.assertIsNone(regras.resultado(tab, "branca", 39))
+        self.assertEqual(regras.resultado(tab, "branca", 40), "empate")
+
+    def test_partida_com_so_damas_empata_apos_20_lances_de_cada(self):
+        # Dama branca vai e volta entre a1 e b2; a preta entre h2 e g1.
+        # Nenhuma captura é possível, então o contador sobe 1 por jogada.
+        tab = montar(a1="B", h2="P")
+        vez, contador = "branca", 0
+        ida_volta = {"branca": (casa("a1"), casa("b2")), "preta": (casa("h2"), casa("g1"))}
+        for jogada in range(1, 41):
+            self.assertIsNone(regras.resultado(tab, vez, contador), f"empatou cedo, na jogada {jogada}")
+            a, b = ida_volta[vez]
+            origem = a if tab[a[0]][a[1]] != VAZIO else b
+            destino = b if origem == a else a
+            mov = [m for m in regras.movimentos_validos(tab, vez)
+                   if m.origem == origem and m.destinos == [destino]][0]
+            contador = regras.atualizar_contador(contador, tab, mov)
+            regras.aplicar_movimento(tab, mov)
+            vez = regras.inimigo(vez)
+        # Depois de 40 jogadas (20 de cada jogador) a partida está empatada
+        self.assertEqual(contador, 40)
+        self.assertEqual(regras.resultado(tab, vez, contador), "empate")
+
     def test_sem_jogadas_perde(self):
         # Pretas sem nenhuma peça: brancas vencem
         self.assertEqual(regras.resultado(montar(c3="b"), "preta", 0), "branca")

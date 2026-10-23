@@ -226,7 +226,8 @@ def jogar():
         # TESTE TERMINAL
         fim = regras.resultado(tabuleiro, vez, contador)
         if fim == "empate":
-            print(f"Empate: {regras.LIMITE_EMPATE} lances seguidos só de damas, sem captura.")
+            print(f"Empate: {regras.LANCES_EMPATE_POR_JOGADOR} lances seguidos de cada "
+                  "jogador só com damas, sem captura nem movimento de peão.")
             return
         if fim is not None:
             print("Você venceu!" if fim == humano else "A IA venceu!")
