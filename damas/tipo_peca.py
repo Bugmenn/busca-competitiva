@@ -5,10 +5,10 @@ from enum import Enum
 
 class TipoPeca(Enum):
     """Cada peça é guardada no tabuleiro como uma letra."""
-    PEAO_BRANCO = 'b'  # peão (pedra comum) das brancas
-    PEAO_PRETO = 'p'   # peão das pretas
-    DAMA_BRANCA = 'B'  # peão branco que chegou à última linha
-    DAMA_PRETA = 'P'   # peão preto que chegou à última linha
+    PEAO_BRANCO = '⛂'  # peão (pedra comum) das brancas
+    PEAO_PRETO = '⛀'   # peão das pretas
+    DAMA_BRANCA = '♚'  # peão branco que chegou à última linha
+    DAMA_PRETA = '♔'   # peão preto que chegou à última linha
 
 
 # Símbolo de uma casa sem peça
