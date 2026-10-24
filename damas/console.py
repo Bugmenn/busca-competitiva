@@ -7,6 +7,7 @@ import time
 from . import regras
 from . import tabuleiro as tb
 from .ia import DIFICULDADES, escolher_jogada
+from .tipo_peca import TipoPeca
 
 # Cada jogador começa com 12 peças
 PECAS_INICIAIS = 12
@@ -200,7 +201,11 @@ def mostrar_placar(tabuleiro):
 def jogar():
     """Laço principal da partida."""
     print("=== DAMAS (regra brasileira) — Humano x IA ===")
-    print("Brancas (b/B) começam. Letra maiúscula = dama.\n")
+    # Mostra os símbolos atuais de cada peça (vêm de tipo_peca.py)
+    pb, db = TipoPeca.PEAO_BRANCO.value, TipoPeca.DAMA_BRANCA.value
+    pp, dp = TipoPeca.PEAO_PRETO.value, TipoPeca.DAMA_PRETA.value
+    print(f"Brancas: peão {pb}, dama {db}  |  Pretas: peão {pp}, dama {dp}. "
+          "As brancas começam.\n")
 
     nivel = escolher_no_menu("Dificuldade:", [("Fácil", "facil"),
                                               ("Médio", "medio"),

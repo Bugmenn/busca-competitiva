@@ -9,7 +9,16 @@ from damas import tabuleiro as tb
 from damas.console import (continuar_captura, escolher_cor, escolher_movimento,
                            escolher_no_menu, jogar, main)
 from damas.ia import escolher_jogada
-from damas.tipo_peca import VAZIO
+from damas.tipo_peca import VAZIO, TipoPeca
+
+# Letras usadas nos testes para montar posições, traduzidas para os símbolos
+# reais das peças (assim os testes não dependem de qual símbolo o jogo usa)
+PECA = {
+    "b": TipoPeca.PEAO_BRANCO.value,
+    "p": TipoPeca.PEAO_PRETO.value,
+    "B": TipoPeca.DAMA_BRANCA.value,
+    "P": TipoPeca.DAMA_PRETA.value,
+}
 
 
 def vazio():
@@ -27,7 +36,7 @@ def montar(**pecas):
     tab = vazio()
     for nome, peca in pecas.items():
         l, c = casa(nome)
-        tab[l][c] = peca
+        tab[l][c] = PECA[peca]
     return tab
 
 
@@ -38,8 +47,8 @@ class TestTabuleiro(unittest.TestCase):
         self.assertEqual(tb.contar_pecas(tab, "branca"), 12)
         self.assertEqual(tb.contar_pecas(tab, "preta"), 12)
         # Regra oficial: a1 é escura e começa com peça branca
-        self.assertEqual(tab[0][0], "b")
-        self.assertEqual(tab[7][7], "p")
+        self.assertEqual(tab[0][0], PECA["b"])
+        self.assertEqual(tab[7][7], PECA["p"])
         for l in range(8):
             for c in range(8):
                 if tab[l][c] != VAZIO:
@@ -60,7 +69,7 @@ class TestTabuleiro(unittest.TestCase):
         mov = regras.movimentos_validos(tab, "branca")[0]
         regras.aplicar_movimento(tab, mov)
         texto = tb.texto_tabuleiro(tab, mov, cor=False)
-        self.assertIn("[b]", texto)  # peça que acabou de jogar
+        self.assertIn(f"[{PECA['b']}]", texto)  # peça que acabou de jogar
         self.assertIn(" x ", texto)  # peça capturada
 
 
@@ -118,7 +127,7 @@ class TestRegras(unittest.TestCase):
         movs = regras.movimentos_validos(tab, "preta")
         self.assertEqual({m.destinos[0] for m in movs}, {casa("c1"), casa("e1")})
         regras.aplicar_movimento(tab, movs[0])
-        self.assertEqual(tab[0][movs[0].destinos[0][1]], "P")
+        self.assertEqual(tab[0][movs[0].destinos[0][1]], PECA["P"])
 
     def test_promocao_so_no_fim_do_lance(self):
         # Peão passa pela última linha (d8) e continua capturando: não vira dama
@@ -126,13 +135,13 @@ class TestRegras(unittest.TestCase):
         mov = regras.movimentos_validos(tab, "branca")[0]
         self.assertEqual(mov.destinos, [casa("d8"), casa("f6")])
         regras.aplicar_movimento(tab, mov)
-        self.assertEqual(tab[5][5], "b")
+        self.assertEqual(tab[5][5], PECA["b"])
 
     def test_promocao_ao_terminar_na_ultima_linha(self):
         tab = montar(c7="b")
         mov = regras.movimentos_validos(tab, "branca")[0]
         regras.aplicar_movimento(tab, mov)
-        self.assertEqual(tab[7][mov.destinos[0][1]], "B")
+        self.assertEqual(tab[7][mov.destinos[0][1]], PECA["B"])
 
     def test_aplicar_em_copia_nao_altera_original(self):
         original = tb.criar_tabuleiro()

@@ -16,12 +16,12 @@ python jogar.py
 
 ### Tabuleiro
 
-- `b` e `p` são peões brancos e pretos. `B` e `P` são damas.
+- Peças brancas: peão `⛂` e dama `♚`. Peças pretas: peão `⛀` e dama `♔`.
 - As casas aparecem coloridas, como num tabuleiro de verdade.
 - O último lance fica em **verde**: a casa de onde a peça saiu, as casas onde ela pousou durante as capturas e a casa final. As peças capturadas nesse lance ficam em **vermelho**.
 - Acima do tabuleiro aparece quantas peças cada lado já capturou.
 
-Num terminal sem cores, as casas claras aparecem como `░░░`. A peça que acabou de jogar aparece como `[b]`, a casa de saída e os pousos intermediários como `*` e as capturadas como `x`.
+Num terminal sem cores, as casas claras aparecem como `░░░`. A peça que acabou de jogar aparece entre colchetes, como `[⛂]`, a casa de saída e os pousos intermediários como `*` e as capturadas como `x`.
 
 ### Regras usadas
 
@@ -42,7 +42,7 @@ python -m unittest -v
 
 | Arquivo | Conteúdo |
 |---|---|
-| `damas/tipo_peca.py` | tipos de peça (b, p, B, P) |
+| `damas/tipo_peca.py` | tipos de peça e seus símbolos (⛂ ⛀ ♚ ♔) |
 | `damas/tabuleiro.py` | posição inicial, contagem de peças e desenho do tabuleiro |
 | `damas/regras.py` | jogadas válidas (função sucessor), aplicação de jogada e fim de jogo |
 | `damas/ia.py` | Minimax com poda alfa-beta e função de avaliação |
