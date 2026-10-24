@@ -21,8 +21,8 @@ FUNDO_CLARO = "\033[48;5;223m"     # bege
 FUNDO_ESCURO = "\033[48;5;130m"    # marrom
 FUNDO_JOGADA = "\033[48;5;28m"     # verde: casas por onde a última peça passou
 FUNDO_CAPTURA = "\033[48;5;124m"   # vermelho: casas das peças capturadas
-TEXTO_BRANCAS = "\033[1;97m"       # letra branca em negrito
-TEXTO_PRETAS = "\033[1;30m"        # letra preta em negrito
+TEXTO_BRANCAS = "\033[1;97m"       # símbolo da peça em branco e negrito
+TEXTO_PRETAS = "\033[1;30m"        # símbolo da peça em preto e negrito
 RESET = "\033[0m"                  # volta às cores normais do terminal
 
 
@@ -81,7 +81,7 @@ def _casa_texto(peca, linha, coluna, cor, passou, capturada):
             return " * "                       # casa de origem / caminho
         return f" {simbolo} "
 
-    # Com cores: o fundo pinta a casa e a letra da peça fica por cima
+    # Com cores: o fundo pinta a casa e o símbolo da peça fica por cima
     if not casa_escura(linha, coluna):
         fundo = FUNDO_CLARO
     elif capturada:
@@ -90,8 +90,8 @@ def _casa_texto(peca, linha, coluna, cor, passou, capturada):
         fundo = FUNDO_JOGADA
     else:
         fundo = FUNDO_ESCURO
-    letra = TEXTO_BRANCAS if tipo_peca.cor_da_peca(peca) == "branca" else TEXTO_PRETAS
-    return f"{fundo}{letra} {simbolo} {RESET}"
+    cor_texto = TEXTO_BRANCAS if tipo_peca.cor_da_peca(peca) == "branca" else TEXTO_PRETAS
+    return f"{fundo}{cor_texto} {simbolo} {RESET}"
 
 
 def texto_tabuleiro(tabuleiro, ultimo_movimento=None, cor=None):

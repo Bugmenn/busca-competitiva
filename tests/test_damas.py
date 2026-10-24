@@ -42,6 +42,16 @@ def montar(**pecas):
 
 class TestTabuleiro(unittest.TestCase):
 
+    def test_simbolos_das_pecas_sao_validos(self):
+        # Os 4 tipos de peça e a casa vazia precisam ter símbolos diferentes
+        # (senão o Enum cria um apelido sem avisar) e de 1 caractere só
+        # (senão a casa deixa de ter 3 colunas no desenho)
+        simbolos = [t.value for t in TipoPeca] + [VAZIO]
+        self.assertEqual(len(TipoPeca.__members__), 4)
+        self.assertEqual(len(set(simbolos)), 5)
+        for simbolo in simbolos:
+            self.assertEqual(len(simbolo), 1, simbolo)
+
     def test_posicao_inicial_12_pecas_em_casas_escuras(self):
         tab = tb.criar_tabuleiro()
         self.assertEqual(tb.contar_pecas(tab, "branca"), 12)

@@ -10,7 +10,7 @@ Precisa só do Python 3.8 ou mais novo. Não é preciso instalar nada. Na pasta 
 
 ```bash
 python jogar.py          # joga uma partida contra a IA
-python -m unittest -v    # deve terminar com "Ran 45 tests ... OK"
+python -m unittest -v    # deve terminar com "Ran 46 tests ... OK"
 ```
 
 - [ ] Joguei uma partida e funcionou, e o tabuleiro aparece colorido.
