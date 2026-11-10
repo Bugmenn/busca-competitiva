@@ -13,4 +13,15 @@ def thanos(pop, melhores_idx):
 def corta_melhores(individuos):
     return individuos[:10]
 
-def atribuir_idx(Npop, fit):8
+def atribuir_idx(Npop, fit):
+    individuos = [
+        (
+            i,
+            float(fit[i])
+        )
+        for i in range(Npop)
+    ]
+    return individuos
+
+def ordenar(individuos):
+    return sorted(individuos, key=lambda x: x[1])

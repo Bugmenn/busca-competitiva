@@ -7,7 +7,6 @@ x = cidades.CIDADES[0]
 y = cidades.CIDADES[1]
 
 Ncidade = cidades.CIDADES.shape[1]
-print("CIDADE", Ncidade)
 
 Npop = 20
 pop = np.array([
