@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"LEMBRETE: se ainda nao leu nesta sessao, ler antes de responder: (1) CLAUDE.md (2) Memory/busca-competitiva.memory\""
+          }
+        ]
+      }
+    ]
+  }
+}

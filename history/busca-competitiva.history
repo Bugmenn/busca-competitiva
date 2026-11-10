@@ -1,0 +1,74 @@
+## [13/10/2026 21:40] — Instalação do setup Bugmenn/claude no projeto
+- O que foi feito: instaladas as skills `revisao-final` e `frontend-design` e os 6 agentes do `Bugmenn/claude` em `.claude/`. Criados `CLAUDE.md` do projeto (template da Parte 2), memória, history e `.claude/settings.json` com o hook de releitura (Parte 5.2). Primeiro as skills/agentes tinham ido para `~/.claude/`; a pedido do usuário foram movidos para o projeto e a pasta global voltou ao estado anterior. A memória automática em `~/.claude/projects/...` foi migrada para `Memory/` e apagada.
+- Commits: nenhum (aguardando autorização)
+- Arquivos alterados: `CLAUDE.md`, `Memory/busca-competitiva.memory`, `history/busca-competitiva.history`, `.claude/settings.json`, `.claude/skills/{revisao-final,frontend-design}/`, `.claude/agents/*.md` (todos novos)
+- Decisões: setup do Claude só dentro do workspace; `~/.claude/CLAUDE.md` global mantido; `arquitetura-projeto`/`otimizacao-codigo` não copiadas (já vêm do sync do chat).
+- Resultado: COMPLETED
+- Lição: perguntar o escopo (global × projeto) antes de instalar setup.
+
+## [13/10/2026 21:50] — Arquivos do Claude no .gitignore
+- O que foi feito: adicionados `.claude/`, `CLAUDE.md`, `Memory/` e `history/` ao `.gitignore`, mantendo CRLF.
+- Commits: nenhum (aguardando autorização)
+- Arquivos alterados: `.gitignore`
+- Resultado: COMPLETED
+
+## [14/10/2026 04:40] — T1 Busca Competitiva: Connect 4 com Minimax alfa-beta
+- O que foi feito: jogo Connect 4 no terminal (humano x IA), IA Minimax + poda alfa-beta com heurística e 3 dificuldades; 16 testes; documento (descrição, regras, formulação, tipo de jogo, algoritmo, medições, reflexão) em docx + PDF; script de empacotamento do zip de entrega. Revisão final com 2 revisores (1 cego): corrigido crash com entrada "²" (isdigit x int), validação de nomes e itens no empacotador, guarda de profundidade >= 1, T1_*.zip no .gitignore, frase de tempo e definição de estado no documento.
+- Commits: nenhum (aguardando autorização)
+- Arquivos alterados: connect4/{__init__,tabuleiro,ia,main}.py, jogar.py, tests/{__init__,test_connect4}.py, scripts/empacotar.py, docs/T1_BuscaCompetitiva_Connect4.{docx,pdf}, README.md, .gitignore
+- Decisões: Minimax com poda alfa-beta (jogo determinístico, informação perfeita, soma zero); ordem centro→bordas para aumentar a poda.
+- Resultado: PARTIAL — falta o grupo preencher nomes e divisão de tarefas e gerar o zip.
+- Lição: str.isdigit() aceita "²"; para validar número digitado usar int() com try/except.
+
+## [23/10/2026] — Damas: IA, regras de empate, console novo, testes, documento; 3D removido
+- O que foi feito: dama_console/ virou o pacote damas/ (git mv), com imports relativos e comentários; a1 escura (regra oficial); tabuleiro colorido com casas grudadas, destaque do último lance e placar de capturas; regra de empate (20 lances só de damas sem captura) e teste terminal; IA Minimax + alfa-beta (damas/ia.py, prof 2/4/6); console humano x IA com lista numerada; 26 testes; README, PENDENCIAS_DO_GRUPO.md e docs/T1_BuscaCompetitiva_Damas.{docx,pdf}. Parte 3D (dama_teste/, requirements.txt) removida a pedido. Revisão final com 2 revisores (1 cego): regras e IA aprovadas; corrigidos 3 testes que passavam pelo motivo errado, ordenação de promoção, acentos/singular nas opções, stdin UTF-8, texto do README e do documento (fonte do 5×10^20, posição de meio de jogo, Chinook).
+- Commits: nenhum (aguardando autorização)
+- Decisões: IA só no console; zip adiado; profundidade 8 descartada (até 27 s).
+- Resultado: PARTIAL — falta o grupo preencher nomes, validar a regra de empate e gerar o zip.
+- Lição: teste de IA só prova algo se o lance "ruim" for o primeiro da lista (senão uma IA que joga o primeiro lance passa).
+
+## [23/10/2026] — Console: sem lista de jogadas, menus numéricos, sorteio de cor
+- O que foi feito: removida a lista numerada de lances (jogador digita as casas; aceita c3 d4, c3-d4, c3xd4, c3d4; começo de caminho único é completado); dificuldade e cor por menu numérico, com opção de sortear a cor; mensagens de erro distinguem peça que não é sua, captura obrigatória com outra peça, caminho de captura errado e jogada ambígua. Revisão com 2 revisores (1 cego): nenhuma jogada impossível de digitar (105 mil lances testados); corrigidas mensagens enganosas, linhas de teste unidas por script, stdin reconfigurado com guarda própria; testes de entrada reescritos verificando as mensagens. 35 testes. README, PENDENCIAS e documento atualizados.
+- Commits: nenhum (aguardando autorização)
+- Arquivos alterados: damas/console.py, tests/test_damas.py, README.md, PENDENCIAS_DO_GRUPO.md, docs/T1_BuscaCompetitiva_Damas.{docx,pdf}
+- Resultado: COMPLETED (entrega geral continua PARTIAL: nomes, regra de empate e zip)
+- Lição: string Python com "\\" + quebra de linha dentro de heredoc vira linha única; para blocos de teste longos, gerar por arquivo .py em vez de heredoc.
+
+## [23/10/2026] — Captura múltipla automática no console
+- O que foi feito: pedido do usuário — ao fazer o primeiro salto de uma captura obrigatória, o resto acontece sozinho. `continuar_captura` avança automaticamente (e avisa) enquanto só há uma casa possível, e só pergunta a próxima casa quando o caminho se divide; aceita 'voltar' (refaz a jogada), 'sair', Enter vazio e várias casas de uma vez. Mensagem da lei da maioria corrigida; formatos misturados (c3e5 g7). Revisão com 2 revisores (1 cego): >170 mil lances testados por script, todos alcançáveis; testes fracos corrigidos. 43 testes.
+- Commits: nenhum (aguardando autorização)
+- Arquivos alterados: damas/console.py, tests/test_damas.py, README.md, PENDENCIAS_DO_GRUPO.md, docs/T1_BuscaCompetitiva_Damas.{docx,pdf}
+- Resultado: COMPLETED
+
+## [23/10/2026] — Zip de entrega
+- O que foi feito: capa com professora (Ligia Ribeiro dos Anjos) e cidade (Blumenau); gerado T1_Felipe_Gabriel_Matheus_Pedro_Yasmin.zip (damas/, tests/, jogar.py, README.md, PDF na raiz), testado extraindo numa pasta limpa: 43 testes OK e partida roda. Zip ignorado pelo git (T1_*.zip).
+- Commits: nenhum (aguardando autorização)
+- Resultado: COMPLETED
+
+## [23/10/2026] — Zip versionado e enviado
+- O que foi feito: o usuário já tinha commitado/enviado o trabalho (2727bdb, ea510ca). A pedido dele, removida a regra T1_*.zip do .gitignore e commitado o zip de entrega direto no main, com push.
+- Commits: 4251650 (pushed para origin/main)
+- Resultado: COMPLETED
+
+## [23/10/2026] — Documento no padrão ABNT e regra de empate corrigida
+- O que foi feito: documento reformatado (NBR 14724: Times 12, 1,5, margens 3/2, recuo 1,25, paginação a partir da folha de rosto; capa + folha de rosto + sumário automático; seções primárias em página nova; quadros/tabela com legenda e fonte; alíneas a), b)); citações autor-data (NBR 10520:2023) e referências conferidas na fonte (NBR 6023). Ao ler as regras oficiais da CBD (Anexo I), descobriu-se que o empate é após 20 lances de damas DE CADA jogador → LIMITE_EMPATE = 40; regras de finais (item 18) documentadas como não implementadas. Revisão com 2 revisores (1 cego): aprovado; acrescentado teste de ponta a ponta. 45 testes. Zip regerado.
+- Commits: 2263de7 (não enviado; aguardando autorização de push)
+- Gerador do documento: scratchpad/gerar_doc_abnt.js (fora do repo); o Word atualiza o sumário via COM (TablesOfContents.Update) antes de exportar.
+- Resultado: COMPLETED
+- Lição: separar a quebra de página em parágrafo próprio após página cheia gera página em branco; usar pageBreakBefore no título seguinte.
+
+## [23/10/2026] — Zip refeito após troca de símbolos das peças (Pedro, f9f2ccd)
+- O que foi feito: o Pedro trocou as peças de letras para símbolos Unicode (⛂ ⛀ ♚ ♔), o que quebrou 29 testes (usavam letras fixas). Testes passaram a traduzir letra→símbolo pelo mapa PECA; mensagem inicial do console mostra os símbolos do enum; README, documento (Quadro 1) e comentários atualizados; novo teste de validade dos símbolos (46 testes). Zip refeito e testado numa pasta limpa. Revisão com 2 revisores (1 cego): aprovado.
+- Commits: o usuário commitou e enviou a 1ª parte em 80bff88; a 2ª parte (teste de símbolos, comentários do tabuleiro, contagem 46 no PDF e zip) está pendente.
+- Decisão em aberto (do grupo): os glifos "cheios" (⛂ ♚) estão nas brancas e os "vazados" (⛀ ♔) nas pretas; em terminal/papel de fundo claro o lado parece invertido.
+- Resultado: COMPLETED
+
+## [10/11/2026] — T2: algoritmo genético do caixeiro-viajante completo
+- O que foi feito: em cima da base do Pedro (56d00bd/33a58c2: cidades, cvfun, thanos), implementados a roleta com pesos lineares, o cycle crossover (Figura 1 do PDF), a mutação por troca, o laço de 10.000 gerações, a saída dos 6 itens e o gráfico (rota + evolução). 14 testes. Revisão com 2 revisores (1 cego): aprovado; corrigidos Npop derivado, n_iter no relatório, último ponto da curva, .gitignore dos .pyc e teste do laço completo.
+- Arquivos alterados:
+  - `BUSCA GENETICOS/main.py` — reescrito (laço do AG, relatório, plot)
+  - `BUSCA GENETICOS/roleta.py` — preenchido
+  - `BUSCA GENETICOS/thanos.py` — só comentários
+  - `BUSCA GENETICOS/crossover.py`, `mutacao.py`, `requirements.txt`, `.gitignore`, `tests/` *(novos)*
+- Commits: nenhum (aguardando autorização).
+- Resultado: COMPLETED
