@@ -72,3 +72,10 @@
   - `BUSCA GENETICOS/crossover.py`, `mutacao.py`, `requirements.txt`, `.gitignore`, `tests/` *(novos)*
 - Commits: nenhum (aguardando autorização).
 - Resultado: COMPLETED
+
+## [12/11/2026] — T2: explicação do AG para a equipe
+- O que foi feito: guia de apresentação com o problema, a tabela regra do enunciado × código, o fluxo (Mermaid) e a correspondência com os passos da lousa. Cada arquivo traz o que faz, a regra que cumpre e o porquê. Inclui a Figura 1 passo a passo, resultados medidos (10 execuções com semente: 3,57–4,57), decisões do grupo e perguntas prováveis. Corrigida a chance de pais repetidos: ~13% (e não 15%).
+- Arquivos alterados:
+  - `BUSCA GENETICOS/EXPLICACAO.md` *(novo)*
+- Commits: nenhum (aguardando autorização).
+- Resultado: COMPLETED

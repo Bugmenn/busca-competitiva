@@ -25,5 +25,5 @@
 
 ## Trabalho T2 — Algoritmos Genéticos (desde 2026-11-07)
 - Caixeiro-viajante, 20 cidades, pasta `BUSCA GENETICOS/`. O Pedro começou (passos 1-4 da lousa: traduzir cvfun, criar 20 indivíduos, avaliar/ordenar, "Thanos"); o Claude fez roleta, cycle crossover, mutação, laço, saída e plot em 2026-11-10.
-- Decisões em aberto para o grupo: os pais podem sair repetidos na roleta (~15% dos pares; o enunciado não proíbe); a mutação é aplicada só nos filhos (interpretação de "cada membro da nova geração").
+- Decisões em aberto para o grupo: os pais podem sair repetidos na roleta (~13% dos pares = 385/3025; o enunciado não proíbe); a mutação é aplicada só nos filhos (interpretação de "cada membro da nova geração").
 - O `__pycache__` do Pedro (cpython-314) já está rastreado no git; o `.gitignore` novo só evita os .pyc futuros. Tirar do índice (`git rm -r --cached`) depende de autorização.

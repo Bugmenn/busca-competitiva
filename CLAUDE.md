@@ -31,7 +31,7 @@ cd "BUSCA GENETICOS"; python -m unittest -v    # T2: 14 testes
 - `roleta.py` — pesos lineares inversos ao ranking (10/55…1/55); `crossover.py` — cycle crossover, com a posição recebida como parâmetro (o teste reproduz a Figura 1 do enunciado); `mutacao.py` — troca de 2 posições.
 - `main.py` — `executar_ag` (a mutação só nos filhos = elitismo, decisão do plano aprovado), `mostrar_resultados` (os 6 itens do enunciado), `plotar` (rota + curva com eixo log).
 - Depende de **numpy + matplotlib** (`requirements.txt`). Nesta máquina estão instalados com `pip --user` (o `C:\Python312` dá erro de permissão).
-- Converge por volta da geração 100–900; o custo final varia entre ~3,9 e 4,35 entre execuções (limite do enunciado, não bug).
+- Converge por volta da geração 100–900; o custo final varia entre 3,57 e 4,57 (10 execuções com semente, média 3,92; limite do enunciado, não bug). Explicação para a equipe em `BUSCA GENETICOS/EXPLICACAO.md`.
 
 ## Arquitetura — T1 `DAMA COMPETITIVA/` (caminhos abaixo relativos a essa pasta)
 
